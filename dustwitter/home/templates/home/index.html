@@ -1,3 +1,14 @@
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+</form>
+
 <h1>Hello</h1>
 
 {% if user.is_authenticated %}
@@ -5,10 +16,10 @@
     <a href="{% url "auth:logout" %}">Logout</a>
     <br>
     <br>
-    <form action="{% url "comment:new" %}" method="post">
+    <form class="form" action="{% url "comment:new" %}" method="post">
         {% csrf_token %}
         <input type="text" name="comment" id="comment" value="Add your comment" />
-        <input type="submit" name="" id="" value="Enviar" />
+        {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
     </form>
 {% else %}
     <a href="{% url "auth:login" %}">Login</a>
