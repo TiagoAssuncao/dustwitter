@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home',
     'comment',
     'dust_auth',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
