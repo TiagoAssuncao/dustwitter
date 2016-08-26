@@ -1,17 +1,21 @@
 <h1>Hello</h1>
 
-<a href="{% url "auth:login" %}">Login</a>
-<a href="{% url "auth:signup" %}">Sign Up</a>
-<a href="{% url "auth:logout" %}">Logout</a>
-<br />
-<br />
-<br />
-<br />
-<form action="{% url "comment:new" %}" method="post">
-    {% csrf_token %}
-    <input type="text" name="comment" id="comment" value="Add your comment" />
-    <input type="submit" name="" id="" value="Enviar" />
-</form>
+{% if user.is_authenticated %}
+    Olá, {{user}}
+    <a href="{% url "auth:logout" %}">Logout</a>
+    <br>
+    <br>
+    <form action="{% url "comment:new" %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="comment" id="comment" value="Add your comment" />
+        <input type="submit" name="" id="" value="Enviar" />
+    </form>
+{% else %}
+    <a href="{% url "auth:login" %}">Login</a>
+    <a href="{% url "auth:signup" %}">Sign Up</a>
+{% endif %}
+<br>
+<br>
 {% for comment in comments %}
     {{comment.comment}}<br>
 {% endfor %}
