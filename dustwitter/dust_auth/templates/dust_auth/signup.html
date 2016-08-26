@@ -1,14 +1,41 @@
-<h1>Login</h1>
+<html>
+<head>
+    {% load static %}
+    {% load bootstrap3 %}
 
-{% if message %}
-{{message}}
-<br />
-<br />
-{% endif %}
-<form action="{% url "auth:signup" %}" method="post">
-    {% csrf_token %}
-    <input type="text" name="username" id="username" value="username" />
-    <input type="email" name="email" id="email" value="email" />
-    <input type="password" name="password" id="password" value="password" />
-    <input type="submit" name="" id="" value="login" />
-</form>
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link type="text/css" rel="stylesheet" href="{% static "css/style.css" %}"  media="screen,projection"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title>Signup</title>
+</head>
+<body>
+    <div class="container">
+    {% if message %}
+        {{message}}
+        <br />
+        <br />
+    {% endif %}
+
+        <form class="form-signin" method="POST" action="{% url "auth:signup"%}">
+            {% csrf_token %}
+            <h2 class="form-signin-heading">Registration</h2>
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input type="user" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+
+    </div> <!-- /container -->
+</body>
