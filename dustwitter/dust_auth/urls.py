@@ -15,10 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from . import views
 
+app_name = 'auth'
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^comment/', include('comment.urls', namespace='comment')),
-    url(r'^auth/', include('dust_auth.urls', namespace='auth')),
-    url(r'^', include('home.urls', namespace='home')),
+    url(r'^login/', views.login, name='login'),
 ]
