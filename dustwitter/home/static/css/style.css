@@ -50,3 +50,7 @@ body {
     font-size: 36pt;
     text-decoration: none;
 }
+#container-home{
+    padding-left: 300px;
+    padding-right: 300px;
+}
