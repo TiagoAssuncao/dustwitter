@@ -36,3 +36,21 @@ def make_login(request):
     }
 
     return context
+
+def signup(request):
+    if request.method == "GET":
+        return render(request, "dust_auth/signup.html")
+    else:
+        form = request.POST
+        username = form.get('username')
+        password = form.get('password')
+        email = form.get('email')
+
+        user = User.objects.create_user(username, email, password)
+        user.save()
+
+        return redirect(reverse("auth:login"))
+
+def make_logout(request):
+    logout(request)
+    return redirect(reverse("home:index"))
