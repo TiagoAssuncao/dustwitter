@@ -6,9 +6,11 @@ from comment.models import Comment
 def new(request):
     form = request.POST
     comment_text = form.get('comment')
+    user = request.user
 
-    comment = Comment.objects.create()
+    comment = Comment.objects.create(author=user)
     comment.comment = comment_text
+    comment.author = user
     comment.save()
 
     return redirect(reverse('home:index'))
