@@ -1,32 +1,43 @@
-{% load bootstrap3 %}
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    {% load bootstrap3 %}
+    {% load static %}
 
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+    <title>Dustwitter</title>
+    <link type="text/css" rel="stylesheet" href="{% static "css/style.css" %}"  media="screen,projection"/>
+</head>
+<body>
 
-</form>
+    <div class="page-header">
+            <h1><a href="/">Dustwitter</a></h1>
+    </div>
 
-<h1>Hello</h1>
-
-{% if user.is_authenticated %}
-    Olá, {{user}}
-    <a href="{% url "auth:logout" %}">Logout</a>
+    {% if user.is_authenticated %}
+        Olá, {{user}}
+        <a href="{% url "auth:logout" %}">Logout</a>
+        <br>
+        <br>
+        <form class="form" action="{% url "comment:new" %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="comment" id="comment" value="Add your comment" />
+            {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
+        </form>
+    {% else %}
+        <a href="{% url "auth:login" %}">Login</a>
+        <a href="{% url "auth:signup" %}">Sign Up</a>
+    {% endif %}
     <br>
     <br>
-    <form class="form" action="{% url "comment:new" %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="comment" id="comment" value="Add your comment" />
-        {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
-    </form>
-{% else %}
-    <a href="{% url "auth:login" %}">Login</a>
-    <a href="{% url "auth:signup" %}">Sign Up</a>
-{% endif %}
-<br>
-<br>
-{% for comment in comments %}
-    {{comment.comment}} {{comment.author}}<br>
-{% endfor %}
+    {% for comment in comments %}
+        {{comment.comment}} {{comment.author}}<br>
+    {% endfor %}
+
+</body>
+</html>
