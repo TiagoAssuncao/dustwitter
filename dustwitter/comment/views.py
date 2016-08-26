@@ -8,9 +8,12 @@ def new(request):
     comment_text = form.get('comment')
     user = request.user
 
-    comment = Comment.objects.create(author=user)
-    comment.comment = comment_text
-    comment.author = user
-    comment.save()
+    try:
+        comment = Comment.objects.create(author=user)
+        comment.comment = comment_text
+        comment.author = user
+        comment.save()
+    except:
+        pass
 
     return redirect(reverse('home:index'))
