@@ -11,15 +11,33 @@
 
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
-    <title>Dustwitter</title>
+    <title>DusTwitter</title>
     <link type="text/css" rel="stylesheet" href="{% static "css/style.css" %}"  media="screen,projection"/>
 </head>
 <body>
 
     <div class="page-header">
-        <h1><a href="/">Dustwitter</a></h1>
+        <h1><a href="/">DusTwitter</a></h1>
     </div>
 
+    <div id='container-home'class="container">
+        <div class="panel-group">
+            {% for comment in comments %}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{{comment.author}}</div>
+                    <div class="panel-body">{{comment.comment}}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     {% if user.is_authenticated %}
         Olá, {{user}}
         <a href="{% url "auth:logout" %}">Logout</a>
@@ -34,16 +52,7 @@
         <a href="{% url "auth:login" %}">Login</a>
         <a href="{% url "auth:signup" %}">Sign Up</a>
     {% endif %}
-    <br>
-    <br>
 
-    <div class='container'>
-    {% for comment in comments %}
-        <div>
-            {{comment.comment}} {{comment.author}}<br>
-        </div>
-    {% endfor %}
-    </div>
 
 </body>
 </html>
