@@ -54,3 +54,20 @@ body {
     padding-left: 300px;
     padding-right: 300px;
 }
+#title-size{
+    font-size: 55;
+    color: white;
+}
+#navbar-size{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    background: #99ccff;
+}
+#color-navbar{
+    font-size: 20;
+    color: white;
+}
+#painel-margin{
+    margin: 20px;
+}
