@@ -3,7 +3,7 @@ from comment.models import Comment
 
 # Create your views here.
 def index(request):
-    comments = Comment.objects.all()
+    comments = reversed(Comment.objects.all())
 
     context = {
         "comments": comments
