@@ -46,6 +46,11 @@ def signup(request):
         email = form.get('email')
 
         user = User.objects.create_user(username, email, password)
+        permission_to_read = Permission.objects.get(codename='can_read')
+        permission_to_comment = Permission.objects.get(codename='can_comment')
+
+        user.user_permissions.add(permission_to_comment)
+        user.user_permissions.add(permission_to_read)
         user.save()
 
         return redirect(reverse("auth:login"))
