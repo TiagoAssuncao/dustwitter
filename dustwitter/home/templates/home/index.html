@@ -29,7 +29,7 @@
                     {% if user.is_authenticated %}
                         <li><a id='color-navbar'href="/">Olá, {{user}}</a></li>
                         {% if user.is_staff %}
-                            <li><a id='color-navbar'href="{% url "auth:users" %}">Usuários</a></li>
+                            <li><a id='color-navbar'href="{% url "auth:users" %}">Permissões</a></li>
                         {% endif %}
                         <li><a id='color-navbar'href="{% url "auth:logout" %}">Logout</a></li>
 
