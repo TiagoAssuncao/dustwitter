@@ -20,14 +20,14 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a id='title-size' class="navbar-brand text-danger" href="#">DusTwitter</a>
+                <a id='title-size' class="navbar-brand text-danger" href="/">DusTwitter</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
-                        <li><a id='color-navbar'href="">Olá, {{user}}</a></li>
+                        <li><a id='color-navbar'href="/">Olá, {{user}}</a></li>
                         {% if user.is_staff %}
                             <li><a id='color-navbar'href="{% url "auth:users" %}">Usuários</a></li>
                         {% endif %}
