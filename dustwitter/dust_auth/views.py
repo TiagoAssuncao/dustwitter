@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 
 # Create your views here.
 def show_login(request):
@@ -62,9 +62,9 @@ def users(request):
     for user in users:
         can_read = 'checked' if user.has_perm('comment.can_read') else ''
         can_comment = 'checked' if user.has_perm('comment.can_comment') else ''
-        print(can_read, can_comment)
         user_perm.append({
             "current_user": user,
+            "id": user.id,
             "can_read": can_read,
             "can_comment": can_comment,
         })

@@ -57,7 +57,7 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 {% else %}
-                    <h3>Sem permissão para ler comentários</h3>
+                    <h3>Sem permissão para escrever</h3>
                 {% endif %}
             {% endif %}
             {% if perms.comment.can_read%}
@@ -68,7 +68,7 @@
                     </div>
                 {% endfor %}
                 {% else %}
-                    <h3>Sem permissão para escrever</h3>
+                    <h3>Sem permissão para ler</h3>
             {% endif %}
         </div>
     </div>
