@@ -57,11 +57,16 @@ def make_logout(request):
 
 def users(request):
     users = User.objects.all()
+
     user_perm = []
     for user in users:
+        can_read = 'checked' if user.has_perm('comment.can_read') else ''
+        can_comment = 'checked' if user.has_perm('comment.can_comment') else ''
+        print(can_read, can_comment)
         user_perm.append({
             "current_user": user,
-            "user_perm": user.user_permissions.all(),
+            "can_read": can_read,
+            "can_comment": can_comment,
         })
 
     context = {"users": user_perm}
