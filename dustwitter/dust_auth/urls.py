@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^signup/', views.signup, name='signup'),
     url(r'^logout/', views.make_logout, name='logout'),
     url(r'^users/', views.users, name='users'),
+    url(r'^perm/', views.make_permissions, name='perm'),
 ]

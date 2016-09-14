@@ -45,14 +45,15 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            {% for user in users %}
+            {% for current_user in users %}
                 <div id='painel-margin' class="panel panel-success">
-                    <div class="panel-heading">{{user.current_user}}</div>
+                    <div class="panel-heading">{{current_user.current_user}}</div>
                     <div class="panel-body">
-                        <form action="" method="post">
-                        <label class="checkbox-inline"><input name="can_read" type="checkbox" {{user.can_read}} value="">Pode ler</label>
-                        <label class="checkbox-inline"><input name="can_comment" type="checkbox" {{user.can_comment}} value="">Pode comentar</label>
-                        <input type="hidden" name="user_id" id="" value="{{user.id}}" />
+                        <form action="{% url "auth:perm" %}" method="post">
+                            {% csrf_token %}
+                        <label class="checkbox-inline"><input name="can_read" type="checkbox" {{current_user.can_read}}>Pode ler</label>
+                        <label class="checkbox-inline"><input name="can_comment" type="checkbox" {{current_user.can_comment}}>Pode comentar</label>
+                        <input type="hidden" name="user_id" id="" value="{{current_user.id}}" />
                         <button type="submit" class="btn btn-success pull-right">Submit</button>
                         </form>
                     </div>
