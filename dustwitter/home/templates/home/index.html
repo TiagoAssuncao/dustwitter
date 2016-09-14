@@ -46,6 +46,7 @@
     <div id='container-home'class="container">
         <div class="panel-group">
     {% if user.is_authenticated %}
+    {% if perms.comment.can_comment %}
         <form class="form" action="{% url "comment:new" %}" method="post">
             {% csrf_token %}
             <!-- <textarea class="form&#45;control" rows="3" name='comment' placeholder="Adding your comment"></textarea> -->
@@ -55,6 +56,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+    {% endif %}
     {% endif %}
             {% for comment in comments %}
                 <div id='painel-margin' class="panel panel-primary">
