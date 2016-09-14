@@ -45,25 +45,31 @@
 
     <div id='container-home'class="container">
         <div class="panel-group">
-    {% if user.is_authenticated %}
-    {% if perms.comment.can_comment %}
-        <form class="form" action="{% url "comment:new" %}" method="post">
-            {% csrf_token %}
-            <!-- <textarea class="form&#45;control" rows="3" name='comment' placeholder="Adding your comment"></textarea> -->
-            <div class="form-group">
-                <!-- <input type="text" class="form&#45;control" placeholder="Disabled input"> -->
-                  <textarea class="form-control" rows="3" name='comment' placeholder="Add your comment" id="comment"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    {% endif %}
-    {% endif %}
-            {% for comment in comments %}
-                <div id='painel-margin' class="panel panel-primary">
-                    <div class="panel-heading">{{comment.author}}</div>
-                    <div class="panel-body">{{comment.comment}}</div>
-                </div>
-            {% endfor %}
+            {% if user.is_authenticated %}
+                {% if perms.comment.can_comment %}
+                    <form class="form" action="{% url "comment:new" %}" method="post">
+                        {% csrf_token %}
+                        <!-- <textarea class="form&#45;control" rows="3" name='comment' placeholder="Adding your comment"></textarea> -->
+                        <div class="form-group">
+                            <!-- <input type="text" class="form&#45;control" placeholder="Disabled input"> -->
+                            <textarea class="form-control" rows="3" name='comment' placeholder="Add your comment" id="comment"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                {% else %}
+                    <h3>Sem permissão para ler comentários</h3>
+                {% endif %}
+            {% endif %}
+            {% if perms.comment.can_read%}
+                {% for comment in comments %}
+                    <div id='painel-margin' class="panel panel-primary">
+                        <div class="panel-heading">{{comment.author}}</div>
+                        <div class="panel-body">{{comment.comment}}</div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                    <h3>Sem permissão para escrever</h3>
+            {% endif %}
         </div>
     </div>
 
