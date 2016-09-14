@@ -29,7 +29,7 @@
                     {% if user.is_authenticated %}
                         <li><a id='color-navbar'href="/">Olá, {{user}}</a></li>
                         {% if user.is_staff %}
-                            <li><a id='color-navbar'href="{% url "auth:users" %}">Usuários</a></li>
+                            <li><a id='color-navbar'href="#">Usuários</a></li>
                         {% endif %}
                         <li><a id='color-navbar'href="{% url "auth:logout" %}">Logout</a></li>
 
@@ -43,33 +43,22 @@
     </nav>
 
 
-    <div id='container-home'class="container">
-        <div class="panel-group">
-            {% if user.is_authenticated %}
-                {% if perms.comment.can_comment %}
-                    <form class="form" action="{% url "comment:new" %}" method="post">
-                        {% csrf_token %}
-                        <!-- <textarea class="form&#45;control" rows="3" name='comment' placeholder="Adding your comment"></textarea> -->
-                        <div class="form-group">
-                            <!-- <input type="text" class="form&#45;control" placeholder="Disabled input"> -->
-                            <textarea class="form-control" rows="3" name='comment' placeholder="Add your comment" id="comment"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                {% else %}
-                    <h3>Sem permissão para escrever</h3>
-                {% endif %}
-            {% endif %}
-            {% if perms.comment.can_read%}
-                {% for comment in comments %}
-                    <div id='painel-margin' class="panel panel-primary">
-                        <div class="panel-heading">{{comment.author}}</div>
-                        <div class="panel-body">{{comment.comment}}</div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            {% for current_user in users %}
+                <div id='painel-margin' class="panel panel-success">
+                    <div class="panel-heading">{{current_user.current_user}}</div>
+                    <div class="panel-body">
+                        <form action="{% url "auth:perm" %}" method="post">
+                            {% csrf_token %}
+                            <label class="checkbox-inline"><input name="can_read" type="checkbox" {{current_user.can_read}}>Pode ler</label>
+                            <label class="checkbox-inline"><input name="can_comment" type="checkbox" {{current_user.can_comment}}>Pode comentar</label>
+                            <input type="hidden" name="user_id" id="" value="{{current_user.id}}" />
+                            <button type="submit" class="btn btn-success pull-right">Submit</button>
+                        </form>
                     </div>
-                {% endfor %}
-            {% else %}
-                <h3>Sem permissão para ler</h3>
-            {% endif %}
+                </div>
+            {% endfor %}
         </div>
     </div>
 
