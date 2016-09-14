@@ -54,3 +54,16 @@ def signup(request):
 def make_logout(request):
     logout(request)
     return redirect(reverse("home:index"))
+
+def users(request):
+    users = User.objects.all()
+    user_perm = []
+    for user in users:
+        user_perm.append({
+            "current_user": user,
+            "user_perm": user.user_permissions.all(),
+        })
+
+    context = {"users": user_perm}
+
+    return render(request, "dust_auth/users.html", context)
