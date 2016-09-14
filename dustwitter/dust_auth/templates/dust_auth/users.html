@@ -29,7 +29,7 @@
                     {% if user.is_authenticated %}
                         <li><a id='color-navbar'href="/">Olá, {{user}}</a></li>
                         {% if user.is_staff %}
-                        <li><a id='color-navbar'href="#">Usuários</a></li>
+                            <li><a id='color-navbar'href="#">Usuários</a></li>
                         {% endif %}
                         <li><a id='color-navbar'href="{% url "auth:logout" %}">Logout</a></li>
 
@@ -51,10 +51,10 @@
                     <div class="panel-body">
                         <form action="{% url "auth:perm" %}" method="post">
                             {% csrf_token %}
-                        <label class="checkbox-inline"><input name="can_read" type="checkbox" {{current_user.can_read}}>Pode ler</label>
-                        <label class="checkbox-inline"><input name="can_comment" type="checkbox" {{current_user.can_comment}}>Pode comentar</label>
-                        <input type="hidden" name="user_id" id="" value="{{current_user.id}}" />
-                        <button type="submit" class="btn btn-success pull-right">Submit</button>
+                            <label class="checkbox-inline"><input name="can_read" type="checkbox" {{current_user.can_read}}>Pode ler</label>
+                            <label class="checkbox-inline"><input name="can_comment" type="checkbox" {{current_user.can_comment}}>Pode comentar</label>
+                            <input type="hidden" name="user_id" id="" value="{{current_user.id}}" />
+                            <button type="submit" class="btn btn-success pull-right">Submit</button>
                         </form>
                     </div>
                 </div>

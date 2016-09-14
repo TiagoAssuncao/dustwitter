@@ -3,7 +3,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Permission
 
-# Create your views here.
 def show_login(request):
     if request.method == "GET":
         return render(request, "dust_auth/login.html")
