@@ -8,5 +8,5 @@ class Comment(models.Model):
     class Meta:
         permissions = (
             ("can_read", "Can read"),
-            ("can_commetn", "Can comment"),
+            ("can_comment", "Can comment"),
         )
