@@ -72,3 +72,25 @@ def users(request):
     context = {"users": user_perm}
 
     return render(request, "dust_auth/users.html", context)
+
+def make_permissions(request):
+    if request.method == "POST":
+        form = request.POST
+        can_read = form.get("can_read")
+        can_comment = form.get("can_comment")
+
+        user_id = int(form.get("user_id"))
+        user = User.objects.get(id=user_id)
+        user.user_permissions.clear()
+
+        if can_read == "on":
+            permission = Permission.objects.get(codename='can_read')
+            user.user_permissions.add(permission)
+
+        if can_comment == "on":
+            permission = Permission.objects.get(codename='can_comment')
+            user.user_permissions.add(permission)
+
+        user.save()
+
+    return redirect(reverse("auth:users"))
