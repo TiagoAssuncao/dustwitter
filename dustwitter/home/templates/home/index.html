@@ -11,7 +11,7 @@
 
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
-    <title>DusTwitter</title>
+    <title>World Twitter</title>
     <link type="text/css" rel="stylesheet" href="{% static "css/style.css" %}"  media="screen,projection"/>
 </head>
 <body>
@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a id='title-size' class="navbar-brand text-danger" href="/">DusTwitter</a>
+                <a id='title-size' class="navbar-brand text-danger" href="/">World Twitter</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,16 +60,12 @@
                     <h3>Sem permissão para escrever</h3>
                 {% endif %}
             {% endif %}
-            {% if perms.comment.can_read%}
                 {% for comment in comments %}
                     <div id='painel-margin' class="panel panel-primary">
                         <div class="panel-heading">{{comment.author}}</div>
                         <div class="panel-body">{{comment.comment}}</div>
                     </div>
                 {% endfor %}
-            {% else %}
-                <h3>Sem permissão para ler</h3>
-            {% endif %}
         </div>
     </div>
 
