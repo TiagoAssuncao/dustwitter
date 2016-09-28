@@ -16,13 +16,16 @@ def show_login(request):
 
 def make_login(request):
     form = request.POST
-    username = form.get('username')
     password = form.get('password')
+    email = form.get('email')
 
-    user = authenticate(username=username, password=password)
+    user_tmp = User.objects.get(email=email)
+    print(user_tmp.username)
+    user = authenticate(username=user_tmp.username, password=password)
     is_logged = False
 
     if user is not None:
+        print ("passou")
         login(request, user)
         message = "Logged"
         is_logged = True
@@ -44,6 +47,11 @@ def signup(request):
         username = form.get('username')
         password = form.get('password')
         email = form.get('email')
+	try:
+		user = User.objects.get(email=email)
+		return render(request, "dust_auth/signup.html", {"message": "This user already exists"})
+	except:
+                 pass
 
         user = User.objects.create_user(username, email, password)
         permission_to_read = Permission.objects.get(codename='can_read')
